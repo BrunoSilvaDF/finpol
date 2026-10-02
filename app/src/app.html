@@ -6,6 +6,8 @@
 		<meta name="text-scale" content="scale" />
 		<title>FinPol</title>
 		%sveltekit.head%
+		<!-- Métricas anônimas de acesso, sem cookies (ADR-004); localhost não é contado. -->
+		<script data-goatcounter="https://finpol.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>

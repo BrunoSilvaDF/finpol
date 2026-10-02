@@ -50,8 +50,10 @@ npm run build    # site estático em app/build
 
 Para fins da LGPD (Lei 13.709/2018), o app **não coleta nem trata dados pessoais em servidor**: todo o
 cálculo acontece no navegador de quem usa, e os parâmetros (inclusive data de nascimento) ficam apenas
-no `localStorage` dele. Não há backend, cookies, contas, análise de uso nem recursos de terceiros; a
-fonte é servida pelo próprio site. Se o app for publicado num site, a hospedagem pode registrar dados
+no `localStorage` dele. Não há backend, cookies nem contas; a fonte é servida pelo próprio site.
+O único recurso de terceiros é o [GoatCounter](https://www.goatcounter.com/), que conta acessos de forma
+anônima: sem cookies, sem guardar o IP e sem receber nada do que é digitado no app — só página aberta,
+referrer, navegador, tamanho de tela e país (ADR-004). Se o app for publicado num site, a hospedagem pode registrar dados
 técnicos de acesso, como o IP, mas não recebe o que é digitado no app.
 
 Nenhum dado pessoal (nome, CPF, matrícula, conta, endereço) fica no código.

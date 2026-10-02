@@ -62,6 +62,9 @@ docs/regras.md                    regras de cálculo (espelhadas na aba "Como ca
   endereço ou data de nascimento completa.
 - PDFs de contracheque ficam fora do git (`.gitignore`). Ao lê-los, extrair apenas valores.
 - Parâmetros do usuário: só no `localStorage`, nunca em arquivos versionados.
+- Métricas (ADR-004): GoatCounter em `app.html` é o único recurso de terceiros; a troca de aba envia
+  só o caminho. Nunca mandar parâmetros ou valores calculados. Mudou o que é coletado? Atualizar os
+  textos de privacidade (README, `ComoCalculamos.svelte`, `AvisoSimulacao.svelte`).
 - Aviso de simulação (`AvisoSimulacao.svelte`): aceite em `localStorage` com versão; ao mudar o
   texto do aviso, incremente `VERSAO` para pedir o aceite de novo.
 - Tutorial (`lib/ui/tutorial.ts`, `driver.js`): começa após o aceite na primeira visita

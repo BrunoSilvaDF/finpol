@@ -52,6 +52,8 @@
 		const sincronizar = (): void => {
 			secao = secaoDoEndereco();
 			window.scrollTo({ top: 0 });
+			// Cada aba conta como uma página nas métricas (ADR-004): só o caminho, nunca parâmetros.
+			window.goatcounter?.count({ path: location.pathname + location.hash });
 		};
 		addEventListener('hashchange', sincronizar);
 		return () => removeEventListener('hashchange', sincronizar);

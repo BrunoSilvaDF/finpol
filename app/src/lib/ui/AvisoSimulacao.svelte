@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Aceite guardado no navegador. Mudou o texto do aviso? Incremente a versão para pedir de novo.
 	const CHAVE = 'finpol:aviso-aceito';
-	const VERSAO = '2';
+	const VERSAO = '3';
 
 	let { onliberado }: { onliberado?: () => void } = $props();
 
@@ -68,7 +68,9 @@
 		<p class="lgpd">
 			<strong>Privacidade (LGPD, Lei 13.709/2018):</strong> os dados que você informa não são coletados nem tratados por
 			nenhum servidor. Todo o cálculo acontece no seu navegador, e as informações ficam guardadas apenas nele; para apagá-las,
-			limpe os dados deste site no navegador.
+			limpe os dados deste site no navegador. O site conta acessos de forma anônima com o GoatCounter: sem cookies, sem
+			guardar seu IP e sem receber nada do que você digita. Só registramos quais páginas são abertas, de onde você veio,
+			navegador, tamanho de tela e país.
 		</p>
 	</div>
 	<label class="aceite">

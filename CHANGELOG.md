@@ -4,6 +4,14 @@ Todas as mudanças relevantes para quem usa o FinPol ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa
 [versionamento semântico](https://semver.org/lang/pt-BR/).
 
+## [Não lançado]
+
+### Adicionado
+
+- Contagem anônima de acessos com o GoatCounter: sem cookies, sem guardar o IP e sem receber nada do
+  que é digitado. O aviso inicial e "Como calculamos" explicam o que é coletado, e o aviso é exibido
+  de novo para quem já o tinha aceitado.
+
 ## [1.0.0] — 2026-10-02
 
 Primeira versão pública, disponível em <https://brunosilvadf.github.io/finpol/>.

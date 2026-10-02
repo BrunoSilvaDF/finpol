@@ -53,8 +53,10 @@
 			<li>
 				<strong>Privacidade (LGPD, Lei 13.709/2018).</strong> Os dados informados não são coletados nem tratados por
 				servidor algum: todo o cálculo acontece no seu navegador e os parâmetros ficam guardados só nele
-				(armazenamento local). O site não usa cookies, contas, análise de uso nem recursos de terceiros (até a fonte
-				é servida pelo próprio site). Para apagar tudo, limpe os dados deste site no navegador.
+				(armazenamento local). O site não usa cookies nem contas (a fonte é servida pelo próprio site). Ele conta
+				acessos de forma anônima com o GoatCounter: sem cookies, sem guardar seu IP e sem receber nada do que você
+				digita. Só registramos quais páginas são abertas, de onde você veio, navegador, tamanho de tela e país. Para
+				apagar tudo, limpe os dados deste site no navegador.
 			</li>
 		</ul>
 	</details>
