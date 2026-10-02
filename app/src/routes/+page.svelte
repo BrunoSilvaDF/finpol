@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { flushSync } from 'svelte';
 	import { compararRegimes } from '$lib/calc/comparativo';
 	import { calcularFolha } from '$lib/calc/folha';
 	import { indiceMes, padraoEm } from '$lib/calc/progressao';
@@ -62,7 +63,46 @@
 		document.getElementById(`aba-${id}`)?.focus();
 	}
 
-	const abrirTutorial = (): void => iniciarTutorial();
+	// Celular: a lateral vira um painel deslizante aberto pelo botão ☰ da barra superior.
+	let painelAberto = $state(false);
+	let botaoMenu = $state<HTMLButtonElement>();
+	let botaoFechar = $state<HTMLButtonElement>();
+	let painel = $state<HTMLElement>();
+	const DURACAO_PAINEL_MS = 260;
+	const ehCelular = (): boolean => matchMedia('(max-width: 760px)').matches;
+
+	function alternarPainel(aberto: boolean): void {
+		if (aberto === painelAberto) return;
+		// Aplica já no DOM: o tutorial mede a posição dos campos logo em seguida.
+		flushSync(() => (painelAberto = aberto));
+		if (!ehCelular()) return;
+		document.body.style.overflow = aberto ? 'hidden' : '';
+		// Durante o tutorial, o tour controla rolagem e foco.
+		if (document.documentElement.classList.contains('tutorial-ativo')) return;
+		if (!aberto) return botaoMenu?.focus({ preventScroll: true });
+		// Abre sempre no topo; o foco vai para o × depois que o painel termina de deslizar (antes disso está invisível).
+		if (painel) painel.scrollTop = 0;
+		setTimeout(() => botaoFechar?.focus({ preventScroll: true }), DURACAO_PAINEL_MS);
+	}
+
+	// Voltando para tela larga com o painel aberto (ex.: girar o aparelho), desfaz o estado de celular.
+	$effect(() => {
+		const consulta = matchMedia('(max-width: 760px)');
+		const aoMudar = (): void => {
+			if (!consulta.matches && painelAberto) {
+				painelAberto = false;
+				document.body.style.overflow = '';
+			}
+		};
+		consulta.addEventListener('change', aoMudar);
+		return () => consulta.removeEventListener('change', aoMudar);
+	});
+
+	function fecharComEsc(evento: KeyboardEvent): void {
+		if (evento.key === 'Escape' && painelAberto && !document.querySelector('.driver-popover')) alternarPainel(false);
+	}
+
+	const abrirTutorial = (): void => iniciarTutorial(alternarPainel);
 	// Na primeira visita, o tour começa logo depois do aceite do aviso de simulação.
 	const aoLiberar = (): void => {
 		if (!tutorialVisto()) abrirTutorial();
@@ -80,8 +120,32 @@
 
 <AvisoSimulacao onliberado={aoLiberar} />
 
+<svelte:window onkeydown={fecharComEsc} />
+
+<header class="barra">
+	<p class="nome">FinPol</p>
+	<button
+		type="button"
+		class="botao-menu"
+		bind:this={botaoMenu}
+		aria-label="Abrir dados e premissas"
+		aria-controls="painel-parametros"
+		aria-expanded={painelAberto}
+		onclick={() => alternarPainel(true)}
+	>
+		<span></span><span></span><span></span>
+	</button>
+</header>
+
 <div class="pagina">
-	<aside>
+	{#if painelAberto}
+		<button type="button" class="fundo-painel" aria-label="Fechar dados e premissas" tabindex="-1" onclick={() => alternarPainel(false)}
+		></button>
+	{/if}
+	<aside id="painel-parametros" bind:this={painel} class:aberto={painelAberto} aria-label="Dados e premissas">
+		<button type="button" class="fechar-painel" bind:this={botaoFechar} aria-label="Fechar dados e premissas" onclick={() => alternarPainel(false)}
+			>×</button
+		>
 		<h1>FinPol</h1>
 		<p class="sub">Projeção da remuneração na carreira de Policial Legislativo do Senado.</p>
 		<button type="button" class="ver-tutorial" onclick={abrirTutorial}>Ver tutorial</button>
@@ -183,6 +247,7 @@
 		--latao-fundo: #f6efdc;
 		--linha-fundo: #e8ecef;
 		--negativo: #8b3a3a;
+		--altura-barra: 3.25rem;
 		--integral: #4a7a5c;
 		color-scheme: light;
 	}
@@ -336,42 +401,119 @@
 	.vazio {
 		color: var(--suave);
 	}
+	/* Barra superior e painel deslizante: só no celular. */
+	.barra,
+	.fechar-painel,
+	.fundo-painel {
+		display: none;
+	}
 	@media (max-width: 760px) {
+		.barra {
+			position: sticky;
+			top: 0;
+			z-index: 30;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: var(--altura-barra);
+			padding: 0 0.5rem 0 1rem;
+			background: var(--superficie);
+			border-bottom: 1px solid var(--linha);
+		}
+		.barra .nome {
+			margin: 0;
+			font-size: 1.25rem;
+			font-weight: 700;
+			color: var(--aco);
+			letter-spacing: -0.01em;
+		}
+		.botao-menu {
+			display: grid;
+			place-items: center;
+			gap: 4px;
+			width: 2.75rem;
+			height: 2.75rem;
+			padding: 0.75rem 0.65rem;
+			background: none;
+			border: 0;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+		.botao-menu span {
+			display: block;
+			width: 1.4rem;
+			height: 2px;
+			border-radius: 1px;
+			background: var(--tinta);
+		}
+		.botao-menu:focus-visible,
+		.fechar-painel:focus-visible {
+			outline: 2px solid var(--aco);
+			outline-offset: 2px;
+		}
 		.pagina {
 			grid-template-columns: minmax(0, 1fr);
 		}
 		aside {
-			position: static;
-			height: auto;
-			border-right: 0;
-			border-bottom: 1px solid var(--linha);
-			padding: 1.5rem 1rem;
+			position: fixed;
+			inset: 0 auto 0 0;
+			z-index: 50;
+			width: min(22rem, 88vw);
+			height: 100dvh;
+			padding: 1rem 1rem 2rem;
+			border-right: 1px solid var(--linha);
+			box-shadow: 0 0 40px rgb(0 0 0 / 0.3);
+			transform: translateX(-105%);
+			visibility: hidden;
+			transition:
+				transform 0.25s ease,
+				visibility 0.25s;
+		}
+		aside.aberto {
+			transform: none;
+			visibility: visible;
+		}
+		.fechar-painel {
+			display: block;
+			margin-left: auto;
+			width: 2.5rem;
+			height: 2.5rem;
+			font: inherit;
+			font-size: 1.5rem;
+			line-height: 1;
+			color: var(--suave);
+			background: none;
+			border: 0;
+			cursor: pointer;
+		}
+		.fundo-painel {
+			display: block;
+			position: fixed;
+			inset: 0;
+			z-index: 40;
+			background: rgb(10 14 20 / 0.55);
+			border: 0;
+			padding: 0;
 		}
 		main {
 			padding: 1.5rem 1rem 3rem;
 			gap: 2rem;
 		}
-		.rodape {
-		margin-top: 2rem;
-		padding-top: 1rem;
-		border-top: 1px solid var(--linha);
-		font-size: 0.75rem;
-		line-height: 1.5;
-		color: var(--suave);
-	}
-	.rodape p {
-		margin: 0 0 0.35rem;
-	}
-	.rodape a {
-		color: var(--aco);
-	}
-	.rodape a:focus-visible {
-		outline: 2px solid var(--aco);
-		outline-offset: 2px;
-	}
-	.menu {
+		.menu {
+			top: var(--altura-barra);
 			margin: -1.5rem -1rem 0;
 			padding: 0.25rem 1rem 0;
+		}
+	}
+	/* Sem animação quando o usuário pede menos movimento e durante o tutorial (o destaque mede a posição final). */
+	@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+		aside {
+			transition: none;
+		}
+	}
+	@media (max-width: 760px) {
+		:global(html.tutorial-ativo) aside {
+			transition: none;
 		}
 	}
 </style>

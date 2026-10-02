@@ -66,6 +66,10 @@ docs/regras.md                    regras de cálculo (espelhadas na aba "Como ca
   texto do aviso, incremente `VERSAO` para pedir o aceite de novo.
 - Tutorial (`lib/ui/tutorial.ts`, `driver.js`): começa após o aceite na primeira visita
   (`finpol:tutorial-visto`); os alvos são marcados com `data-tour` na lateral e no menu.
+  Sem animação entre passos (`animate: false`): cliques rápidos embaralham o estado do driver.js.
+- Celular (≤ 760px): barra superior com ☰; a lateral vira painel deslizante (`alternarPainel` em
+  `+page.svelte`). Durante o tutorial o painel abre/fecha sem animação e com `flushSync`, para o
+  destaque medir a posição final.
 - O repositório é publicável: padrões e testes usam valores genéricos (posse 01/2022, nascimento
   01/1985). Nunca usar dados de contracheques reais de pessoas identificáveis em testes ou docs.
 
