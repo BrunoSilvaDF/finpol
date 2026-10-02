@@ -4,3 +4,5 @@ export const ANO_COPYRIGHT = 2026;
 export const LICENCA = 'GNU AGPL-3.0';
 export const URL_LICENCA = 'https://www.gnu.org/licenses/agpl-3.0.html';
 export const URL_CODIGO_FONTE = 'https://github.com/BrunoSilvaDF/finpol';
+export const VERSAO = __VERSAO_APP__;
+export const URL_CHANGELOG = `${URL_CODIGO_FONTE}/blob/main/CHANGELOG.md`;

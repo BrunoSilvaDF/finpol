@@ -1,8 +1,13 @@
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 
+// Versão exibida no rodapé da página: vem do package.json no momento do build.
+const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'));
+
 export default defineConfig({
+	define: { __VERSAO_APP__: JSON.stringify(version) },
 	plugins: [
 		sveltekit({
 			compilerOptions: {

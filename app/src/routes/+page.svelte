@@ -16,7 +16,7 @@
 	import Veredito from '$lib/ui/Veredito.svelte';
 	import { carregarParametros, salvarParametros } from '$lib/ui/persistencia';
 	import { iniciarTutorial, tutorialVisto } from '$lib/ui/tutorial';
-	import { ANO_COPYRIGHT, LICENCA, TITULAR, URL_CODIGO_FONTE, URL_LICENCA } from '$lib/sobre';
+	import { ANO_COPYRIGHT, LICENCA, TITULAR, URL_CHANGELOG, URL_CODIGO_FONTE, URL_LICENCA, VERSAO } from '$lib/sobre';
 
 	const hoje = new Date();
 	const anoAtual = hoje.getFullYear();
@@ -231,6 +231,10 @@
 				<ComoCalculamos />
 			</div>
 		{/if}
+		<footer class="rodape-pagina">
+			FinPol versão {VERSAO}.
+			<a href={URL_CHANGELOG} rel="noopener noreferrer" target="_blank">O que há de novo</a>
+		</footer>
 	</main>
 </div>
 
@@ -330,6 +334,19 @@
 		cursor: pointer;
 	}
 	.ver-tutorial:focus-visible {
+		outline: 2px solid var(--aco);
+		outline-offset: 2px;
+	}
+	.rodape-pagina {
+		padding-top: 1rem;
+		border-top: 1px solid var(--linha);
+		font-size: 0.75rem;
+		color: var(--suave);
+	}
+	.rodape-pagina a {
+		color: var(--aco);
+	}
+	.rodape-pagina a:focus-visible {
 		outline: 2px solid var(--aco);
 		outline-offset: 2px;
 	}

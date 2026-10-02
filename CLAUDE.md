@@ -74,6 +74,13 @@ docs/regras.md                    regras de cálculo (espelhadas na aba "Como ca
 - O repositório é publicável: padrões e testes usam valores genéricos (posse 01/2022, nascimento
   01/1985). Nunca usar dados de contracheques reais de pessoas identificáveis em testes ou docs.
 
+## Versionamento
+
+- Versionamento semântico. A versão vive só em `app/package.json` e chega à página pelo Vite
+  (`__VERSAO_APP__`, em `lib/sobre.ts`).
+- Para lançar: atualizar `version` no `package.json` (e o lockfile), adicionar a entrada no
+  `CHANGELOG.md` (linguagem de usuário, sem commits técnicos) e criar a tag anotada `vX.Y.Z`.
+
 ## Convenções
 
 - Código e textos da UI em português; nomes de domínio (folha, padrão, verba).

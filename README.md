@@ -23,6 +23,11 @@ dados ficam num painel aberto pelo botão ☰ da barra superior.
   (com valor ajustável) e ano a ano aposentado.
 - **Como calculamos:** todas as regras, tabelas e fontes.
 
+## Versões
+
+Versão atual: **1.0.0**. As mudanças de cada versão estão no [CHANGELOG](CHANGELOG.md); a versão em uso
+aparece no rodapé da página.
+
 ## Regras de cálculo
 
 As regras, premissas, parâmetros e limitações estão em **[docs/regras.md](docs/regras.md)**.
