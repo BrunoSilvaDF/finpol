@@ -10,6 +10,8 @@ Licença: AGPL-3.0-or-later, copyright BrunoSilvaDF (`LICENSE`; textos do app em
 - Sem backend; `ssr = false` + `prerender = true` com `adapter-static` (ADR-003). `BASE_PATH`
   define o caminho base no build do GitHub Pages; vazio no desenvolvimento.
 - Tudo dentro de `app/`: `npm run dev`, `npm test` (vitest), `npm run check` (svelte-check), `npm run build`.
+- `app/.npmrc` fixa o registro público (registry.npmjs.org): o `package-lock.json` não pode ter URLs de
+  registros internos, senão o `npm ci` do GitHub Actions falha.
 - Antes de concluir qualquer mudança: `npm test` e `npm run check` verdes.
 
 ## Estrutura
