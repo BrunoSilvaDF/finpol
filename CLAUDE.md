@@ -62,6 +62,8 @@ docs/regras.md                    regras de cálculo (espelhadas na aba "Como ca
 - Parâmetros do usuário: só no `localStorage`, nunca em arquivos versionados.
 - Aviso de simulação (`AvisoSimulacao.svelte`): aceite em `localStorage` com versão; ao mudar o
   texto do aviso, incremente `VERSAO` para pedir o aceite de novo.
+- Tutorial (`lib/ui/tutorial.ts`, `driver.js`): começa após o aceite na primeira visita
+  (`finpol:tutorial-visto`); os alvos são marcados com `data-tour` na lateral e no menu.
 - O repositório é publicável: padrões e testes usam valores genéricos (posse 01/2022, nascimento
   01/1985). Nunca usar dados de contracheques reais de pessoas identificáveis em testes ou docs.
 

@@ -3,6 +3,8 @@
 	const CHAVE = 'finpol:aviso-aceito';
 	const VERSAO = '2';
 
+	let { onliberado }: { onliberado?: () => void } = $props();
+
 	let dialogo: HTMLDialogElement;
 	let concordo = $state(false);
 	let aceito = false;
@@ -17,7 +19,8 @@
 
 	$effect(() => {
 		aceito = jaAceitou();
-		if (!aceito) dialogo.showModal();
+		if (aceito) onliberado?.();
+		else dialogo.showModal();
 	});
 
 	function aceitar(): void {
@@ -28,6 +31,7 @@
 			// Sem armazenamento: o aviso volta a aparecer na próxima visita.
 		}
 		dialogo.close();
+		onliberado?.();
 	}
 
 	// Esc não dispensa o aviso; se o navegador fechar mesmo assim, ele reabre até o aceite.

@@ -14,6 +14,7 @@
 	import TabelaAnual from '$lib/ui/TabelaAnual.svelte';
 	import Veredito from '$lib/ui/Veredito.svelte';
 	import { carregarParametros, salvarParametros } from '$lib/ui/persistencia';
+	import { iniciarTutorial, tutorialVisto } from '$lib/ui/tutorial';
 	import { ANO_COPYRIGHT, LICENCA, TITULAR, URL_CODIGO_FONTE, URL_LICENCA } from '$lib/sobre';
 
 	const hoje = new Date();
@@ -61,6 +62,12 @@
 		document.getElementById(`aba-${id}`)?.focus();
 	}
 
+	const abrirTutorial = (): void => iniciarTutorial();
+	// Na primeira visita, o tour começa logo depois do aceite do aviso de simulação.
+	const aoLiberar = (): void => {
+		if (!tutorialVisto()) abrirTutorial();
+	};
+
 	// Setas esquerda/direita percorrem as abas (padrão de acessibilidade de tablist).
 	function navegarComTeclado(evento: KeyboardEvent): void {
 		const passo = { ArrowRight: 1, ArrowLeft: -1 }[evento.key];
@@ -71,12 +78,13 @@
 	}
 </script>
 
-<AvisoSimulacao />
+<AvisoSimulacao onliberado={aoLiberar} />
 
 <div class="pagina">
 	<aside>
 		<h1>FinPol</h1>
 		<p class="sub">Projeção da remuneração na carreira de Policial Legislativo do Senado.</p>
+		<button type="button" class="ver-tutorial" onclick={abrirTutorial}>Ver tutorial</button>
 		<Parametros bind:params />
 		<footer class="rodape">
 			<p>FinPol © {ANO_COPYRIGHT} {TITULAR}.</p>
@@ -89,7 +97,7 @@
 
 	<main>
 		<!-- svelte-ignore a11y_interactive_supports_focus -->
-		<div class="menu" role="tablist" aria-label="Seções" tabindex="-1" onkeydown={navegarComTeclado}>
+		<div class="menu" data-tour="menu" role="tablist" aria-label="Seções" tabindex="-1" onkeydown={navegarComTeclado}>
 			{#each SECOES as s (s.id)}
 				<button
 					type="button"
@@ -244,6 +252,21 @@
 	}
 	.resumo strong {
 		color: var(--aco);
+	}
+	.ver-tutorial {
+		font: inherit;
+		font-size: 0.8125rem;
+		margin: -1rem 0 1.5rem;
+		padding: 0.3rem 0.7rem;
+		color: var(--aco);
+		background: none;
+		border: 1px solid var(--linha);
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.ver-tutorial:focus-visible {
+		outline: 2px solid var(--aco);
+		outline-offset: 2px;
 	}
 	.rodape {
 		margin-top: 2rem;

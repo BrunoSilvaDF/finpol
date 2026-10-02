@@ -35,7 +35,7 @@
 </script>
 
 <form onsubmit={(e) => e.preventDefault()}>
-	<fieldset>
+	<fieldset data-tour="carreira">
 		<legend>Carreira</legend>
 		<label>Data de posse <input type="date" bind:value={params.dataPosse} required /></label>
 		<label>
@@ -54,7 +54,7 @@
 		</label>
 	</fieldset>
 
-	<fieldset>
+	<fieldset data-tour="descontos">
 		<legend>Descontos</legend>
 		<label>Plano de saúde, sindicato e associações <input type="number" step="0.01" min="0" bind:value={params.outrosDescontos} /></label>
 		<label>
@@ -70,7 +70,7 @@
 		<label>Dependentes no IR <input type="number" min="0" bind:value={params.dependentesIr} /></label>
 	</fieldset>
 
-	<fieldset>
+	<fieldset data-tour="aposentadoria">
 		<legend>Aposentadoria</legend>
 		<div class="lado-a-lado">
 			<label>
@@ -114,7 +114,7 @@
 		</details>
 	</fieldset>
 
-	<fieldset>
+	<fieldset data-tour="previdencia">
 		<legend>Previdência</legend>
 		<label>
 			Regime

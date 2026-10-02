@@ -11,7 +11,8 @@ diante, comparando o regime complementar (teto + Funpresp) com a integralidade (
 
 Quatro abas no menu superior (a aba aberta fica no endereço: `#resumo`, `#vida-ativa`,
 `#aposentadoria`, `#como-calculamos`). Na primeira visita, um aviso de que se trata de simulação
-precisa ser aceito; o aceite fica guardado no navegador.
+precisa ser aceito; o aceite fica guardado no navegador. Em seguida, um tutorial guiado destaca onde
+informar os dados e as abas de resultados (dá para rever pelo botão "Ver tutorial").
 
 - **Resumo:** veredito (qual regime rende mais na aposentadoria, considerando investir a diferença de
   líquido da ativa) com as três opções lado a lado e o resumo da carreira.
