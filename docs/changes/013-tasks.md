@@ -10,4 +10,6 @@
 - [x] Aba "Como calculamos" com todas as regras, tabelas e fontes
 - [x] `adapter-static` + caminho base configurável + workflow GitHub Actions (testes, build, Pages)
 - [x] Investimento mensal ajustável no "complementar + investimento" (padrão: a diferença de líquido)
-- [ ] Histórico do git sem dados pessoais: backup local (bundle) e novo histórico — force push só com confirmação
+- [x] Histórico do git sem dados pessoais: repositório antigo renomeado (privado) e novo repositório com histórico limpo
+- [x] Lockfile com o registro público do npm (o interno não é acessível ao GitHub Actions); `app/.npmrc` fixa o registro
+- [x] Repositório público, GitHub Pages ativo (fonte: GitHub Actions) e publicado em https://brunosilvadf.github.io/finpol/
