@@ -1,4 +1,4 @@
-import { driver, type DriveStep, type Driver } from 'driver.js';
+import { driver, type DriveStep, type Driver, type PopoverDOM } from 'driver.js';
 import 'driver.js/dist/driver.css';
 import './tutorial.css';
 
@@ -91,6 +91,17 @@ const paraDriver = (p: Passo): DriveStep => ({
 	}
 });
 
+// "Pular tutorial" em texto, mais visível que o ×; no último passo já existe "Concluir".
+function adicionarBotaoPular(popover: PopoverDOM, { driver: d }: { driver: Driver }): void {
+	if (d.isLastStep()) return;
+	const pular = document.createElement('button');
+	pular.type = 'button';
+	pular.className = 'finpol-pular';
+	pular.textContent = 'Pular tutorial';
+	pular.addEventListener('click', () => d.destroy());
+	popover.footer.insertBefore(pular, popover.footerButtons);
+}
+
 // Uma única instância, reaproveitada a cada abertura (evita tours sobrepostos).
 let tour: Driver | null = null;
 
@@ -111,6 +122,7 @@ export function iniciarTutorial(alternarLateral: MostrarLateral): void {
 		stagePadding: 6,
 		stageRadius: 8,
 		allowKeyboardControl: true,
+		onPopoverRender: adicionarBotaoPular,
 		onDestroyed: () => {
 			marcarVisto();
 			mostrarLateral(false);

@@ -62,3 +62,28 @@
 .driver-popover.finpol-tour .driver-popover-arrow-side-bottom.driver-popover-arrow {
 	border-bottom-color: var(--superficie);
 }
+
+/* Rodapé: progresso, "Pular tutorial" e navegação; quebra linha em telas estreitas. */
+.driver-popover.finpol-tour .driver-popover-footer {
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+.driver-popover.finpol-tour .driver-popover-footer .finpol-pular {
+	margin-right: auto;
+	padding: 0.35rem 0.25rem;
+	font: inherit;
+	font-size: 0.8125rem;
+	color: var(--suave);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+.driver-popover.finpol-tour .driver-popover-footer .finpol-pular:hover {
+	color: var(--tinta);
+}
+.driver-popover.finpol-tour .driver-popover-footer .finpol-pular:focus-visible {
+	outline: 2px solid var(--aco);
+	outline-offset: 2px;
+}
