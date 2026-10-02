@@ -14,6 +14,7 @@
 	import TabelaAnual from '$lib/ui/TabelaAnual.svelte';
 	import Veredito from '$lib/ui/Veredito.svelte';
 	import { carregarParametros, salvarParametros } from '$lib/ui/persistencia';
+	import { ANO_COPYRIGHT, LICENCA, TITULAR, URL_CODIGO_FONTE, URL_LICENCA } from '$lib/sobre';
 
 	const hoje = new Date();
 	const anoAtual = hoje.getFullYear();
@@ -77,6 +78,13 @@
 		<h1>FinPol</h1>
 		<p class="sub">Projeção da remuneração na carreira de Policial Legislativo do Senado.</p>
 		<Parametros bind:params />
+		<footer class="rodape">
+			<p>FinPol © {ANO_COPYRIGHT} {TITULAR}.</p>
+			<p>
+				Software livre sob a licença <a href={URL_LICENCA} rel="noopener noreferrer" target="_blank">{LICENCA}</a>, sem nenhuma
+				garantia. <a href={URL_CODIGO_FONTE} rel="noopener noreferrer" target="_blank">Código-fonte</a>.
+			</p>
+		</footer>
 	</aside>
 
 	<main>
@@ -237,6 +245,24 @@
 	.resumo strong {
 		color: var(--aco);
 	}
+	.rodape {
+		margin-top: 2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--linha);
+		font-size: 0.75rem;
+		line-height: 1.5;
+		color: var(--suave);
+	}
+	.rodape p {
+		margin: 0 0 0.35rem;
+	}
+	.rodape a {
+		color: var(--aco);
+	}
+	.rodape a:focus-visible {
+		outline: 2px solid var(--aco);
+		outline-offset: 2px;
+	}
 	.menu {
 		position: sticky;
 		top: 0;
@@ -302,7 +328,25 @@
 			padding: 1.5rem 1rem 3rem;
 			gap: 2rem;
 		}
-		.menu {
+		.rodape {
+		margin-top: 2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--linha);
+		font-size: 0.75rem;
+		line-height: 1.5;
+		color: var(--suave);
+	}
+	.rodape p {
+		margin: 0 0 0.35rem;
+	}
+	.rodape a {
+		color: var(--aco);
+	}
+	.rodape a:focus-visible {
+		outline: 2px solid var(--aco);
+		outline-offset: 2px;
+	}
+	.menu {
 			margin: -1.5rem -1rem 0;
 			padding: 0.25rem 1rem 0;
 		}

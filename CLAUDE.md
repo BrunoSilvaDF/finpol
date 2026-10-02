@@ -1,7 +1,8 @@
 # FinPol — instruções do projeto
 
-Projeto pessoal: app web de projeção salarial da carreira de Policial Legislativo Federal
-do Senado. Visão geral, regras de cálculo e limitações: ver `README.md`.
+App web de projeção salarial da carreira de Policial Legislativo Federal do Senado.
+Visão geral: `README.md`. Regras de cálculo, parâmetros e limitações: `docs/regras.md`.
+Licença: AGPL-3.0-or-later, copyright BrunoSilvaDF (`LICENSE`; textos do app em `app/src/lib/sobre.ts`).
 
 ## Stack e comandos
 
@@ -35,6 +36,7 @@ app/src/routes/+page.svelte       página única com abas (Resumo, Vida ativa, A
                                   + tokens de cor (claro/escuro)
 docs/changes/NNN-tasks.md         plano de cada mudança, com checklist
 docs/decisions/ADR-NNN-*.md       decisões arquiteturais
+docs/regras.md                    regras de cálculo (espelhadas na aba "Como calculamos")
 ```
 
 ## Regras do domínio (não quebrar)
@@ -49,6 +51,7 @@ docs/decisions/ADR-NNN-*.md       decisões arquiteturais
 - Tudo em reais constantes de 2026; taxas sempre reais (ADR-001). Nada de IPCA no motor.
 - Teto do RGPS só via `tetoRgps(params, ano)`; `calcularFolha` recebe `{ ano }` da competência (ADR-002).
 - PSSS é calculado pela tabela do RPPS com arredondamento por faixa (dá 988,10 no teto).
+- Mudou uma regra? Atualize juntos `docs/regras.md` e `app/src/lib/ui/ComoCalculamos.svelte`.
 - Funções do motor são puras: "hoje" entra como argumento (`mesAtual`), nunca `new Date()`.
 
 ## Privacidade

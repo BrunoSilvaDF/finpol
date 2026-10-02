@@ -22,6 +22,7 @@
 		VENCIMENTO_POR_PADRAO,
 		VPI
 	} from '$lib/data/tabela-2026';
+	import { ANO_COPYRIGHT, LICENCA, TITULAR, URL_CODIGO_FONTE, URL_LICENCA } from '$lib/sobre';
 	import { reaisCentavos } from './formato';
 
 	const pct = (fracao: number): string => `${(Math.round(fracao * 10000) / 100).toLocaleString('pt-BR')}%`;
@@ -233,6 +234,20 @@
 			<li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12618.htm" rel="noopener noreferrer" target="_blank">Lei 12.618/2012: previdência complementar do servidor</a></li>
 			<li><a href="https://www.funpresp.com.br/planos-e-produtos/" rel="noopener noreferrer" target="_blank">Funpresp: Regulamento do LegisPrev, FCBE e taxa de carregamento</a></li>
 		</ul>
+	</details>
+	<details>
+		<summary>Licença</summary>
+		<p>Copyright (C) {ANO_COPYRIGHT} {TITULAR}.</p>
+		<p>
+			O FinPol é software livre: você pode redistribuí-lo e/ou modificá-lo sob os termos da
+			<a href={URL_LICENCA} rel="noopener noreferrer" target="_blank">{LICENCA}</a> (GNU Affero General Public License,
+			versão 3 ou posterior). Ele é distribuído na esperança de ser útil, mas <strong>sem nenhuma garantia</strong>, nem
+			mesmo a de comerciabilidade ou de adequação a um propósito específico.
+		</p>
+		<p>
+			Quem disponibilizar uma versão modificada pela rede deve oferecer o código-fonte dela aos usuários. O código desta
+			versão está em <a href={URL_CODIGO_FONTE} rel="noopener noreferrer" target="_blank">{URL_CODIGO_FONTE}</a>.
+		</p>
 	</details>
 </div>
 
